@@ -1,0 +1,6 @@
+*.py[o|c]
+__pycache__
+/*.egg-info
+/config.json
+/Pipfile
+/Pipfile.lock
