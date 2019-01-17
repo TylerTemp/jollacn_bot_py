@@ -1,0 +1,10 @@
+/var/log/supervisor/jollacn_bot_py/*.log {
+	daily
+	missingok
+	rotate 60
+	#compress
+	#delaycompress
+	notifempty
+	create 0640 root root
+	dateext
+}

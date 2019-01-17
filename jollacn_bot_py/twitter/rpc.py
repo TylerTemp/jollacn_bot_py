@@ -15,7 +15,7 @@ class OnRequest(object):
         logger = logging.getLogger('jollacn_bot_py.twitter.rpc.on_request')
         logger.info('get request %s', body)
         assert props.reply_to is not None
-        args = json.loads(body)
+        args = json.loads(body.decode('utf-8'))
         # urls = args['urls']
         fetcher_args = self.fetcher
         results = []
