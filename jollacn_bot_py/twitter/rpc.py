@@ -47,7 +47,16 @@ class OnRequest(object):
 def rpc(rabbitmq, queue, durable=True, prefetch_count=1, fetcher={}):
     logger = logging.getLogger('jollacn_bot_py.twitter.rpc.rpc')
     logger.info('connecting to %s', rabbitmq)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(**rabbitmq))
+    username = rabbitmq.pop('username', None)
+    password = rabbitmq.pop('password', None)
+    if username is not None and password is not None:
+        credentials = pika.PlainCredentials(username, password)
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(credentials=credentials, **rabbitmq))
+    else:
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(**rabbitmq))
+
     logger.info('connecting channel')
     channel = connection.channel()
 
